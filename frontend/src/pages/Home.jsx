@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import {TrendingUp, ArrowRight} from 'lucide-react';
+import { TrendingUp, ArrowRight } from 'lucide-react';
+import { Search, LineChart } from 'lucide-react';
 
 import Header from '../components/Header'
 const containerVariants = {
@@ -11,7 +12,7 @@ const containerVariants = {
         transition: { staggerChildren: 0.3 },
     },
 };
-    
+
 const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -46,6 +47,30 @@ const faqs = [
     }
 ];
 
+const steps = [
+    {
+        num: 1,
+        title: 'Add Your Ticker',
+        desc: 'Enter your stock symbol and pick a period & interval.',
+        icon: Search ,
+        color: 'from-blue-500 to-cyan-500'
+    },
+    {
+        num: 2,
+        title: 'View Predictions',
+        desc: 'See todays close price alongside our next-day forecast and trend indicator.',
+        icon: TrendingUp ,
+        color: 'from-purple-500 to-pink-500'
+    },
+    {
+        num: 3,
+        title: 'Act Confidently',
+    desc: 'Use the Buy/Hold/Sell signal to guide your trading decisions.',
+    icon: LineChart ,
+        color: 'from-green-500 to-emerald-500'
+    }
+];
+
 export default function Homepage() {
     const [openFaq, setOpenFaq] = useState(null);
 
@@ -55,8 +80,8 @@ export default function Homepage() {
             <Header />
             {/* Hero Section */}
 
-            
-            
+
+
 
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-white to-blue-50">
                 {/* Animated Background Elements */}
@@ -177,7 +202,7 @@ export default function Homepage() {
                 </motion.div>
 
                 {/* Add this to your global CSS or Tailwind config */}
-                <style jsx>{`
+                {/* <style jsx>{`
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }
           33% { transform: translate(30px, -50px) scale(1.1); }
@@ -193,7 +218,7 @@ export default function Homepage() {
         .animation-delay-4000 {
           animation-delay: 4s;
         }
-      `}</style>
+      `}</style> */}
             </section>
 
 
@@ -248,65 +273,86 @@ export default function Homepage() {
                 </div>
             </section>
 
-            {/* Get Started Section */}
-            <section id="get-started" className="py-20 bg-gray-50">
-                <div className="max-w-4xl mx-auto px-4 text-center">
-                    <motion.h2
-                        className="text-3xl font-bold mb-8"
-                        variants={itemVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        How to Get Started
-                    </motion.h2>
+
+{/* Get Started Section */}
+            <section id="get-started" className="relative py-24 bg-gradient-to-b from-gray-50 to-white">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-grid-gray-100 opacity-40" />
+
+                <div className="relative max-w-6xl mx-auto px-4">
                     <motion.div
-                        className="flex flex-col md:flex-row justify-center items-start md:items-center gap-8 mb-8"
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        className="text-center mb-16"
                     >
-                        {[
-                            {
-                                num: 1,
-                                title: 'Add Your Ticker',
-                                desc: 'Enter your stock symbol and pick a period & interval.'
-                            },
-                            {
-                                num: 2,
-                                title: 'View Predictions',
-                                desc: 'See today’s close price alongside our next-day forecast and trend indicator.'
-                            },
-                            {
-                                num: 3,
-                                title: 'Act Confidently',
-                                desc: 'Use the Buy/Hold/Sell signal to guide your trading decisions.'
-                            }
-                        ].map(step => (
+                        <motion.h2
+                            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                        >
+                            Start in Three Simple Steps
+                        </motion.h2>
+                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                            Get started with StockSight in minutes and make data-driven trading decisions
+                        </p>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-3 gap-8 mb-16">
+                        {steps.map((step, index) => (
                             <motion.div
                                 key={step.num}
-                                className="flex items-start md:items-center gap-4"
-                                variants={itemVariants}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.2 }}
+                                className="relative group"
                             >
-                                <div className="h-12 w-12 flex items-center justify-center bg-blue-600 text-white rounded-full text-xl font-bold">
-                                    {step.num}
-                                </div>
-                                <div className="text-left">
-                                    <h4 className="text-xl font-semibold mb-1">{step.title}</h4>
-                                    <p className="text-gray-600">{step.desc}</p>
+                                <div className="relative z-10 bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                                    {/* Gradient Border */}
+                                    <div className={`absolute inset-0 bg-gradient-to-r ${step.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl -m-0.5`} />
+                                    <div className="relative bg-white rounded-2xl p-6">
+                                        {/* Icon & Number */}
+                                        <div className="flex items-center justify-between mb-6">
+                                            <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${step.color} flex items-center justify-center text-white`}>
+                                                <step.icon size={24} />
+                                            </div>
+                                            <span className="text-4xl font-bold text-gray-200">0{step.num}</span>
+                                        </div>
+
+                                        {/* Content */}
+                                        <h3 className="text-xl font-bold mb-4">{step.title}</h3>
+                                        <p className="text-gray-600 mb-6">{step.desc}</p>
+
+                                        {/* Progress Line */}
+                                        {index < steps.length - 1 && (
+                                            <div className="hidden md:block absolute top-1/2 left-full w-8 border-t-2 border-dashed border-gray-200 -translate-y-1/2" />
+                                        )}
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
-                    </motion.div>
-                    <motion.button
-                        className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 focus:outline-none"
-                        variants={buttonVariants}
-                        whileHover="hover"
-                        whileTap="tap"
+                    </div>
+
+                    {/* CTA Button */}
+                    <motion.div
+                        className="text-center"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                     >
-                        Start Tracking Stocks
-                    </motion.button>
+                        <motion.a
+                            href="/signup"
+                            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl text-lg font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 group"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            Start Tracking Stocks
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </motion.a>
+
+                        <p className="mt-4 text-gray-500">
+                            No credit card required • Free to get started
+                        </p>
+                    </motion.div>
                 </div>
             </section>
 
