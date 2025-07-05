@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { TrendingUp, ArrowRight } from 'lucide-react';
-import { Search, LineChart } from 'lucide-react';
+import { motion,AnimatePresence } from 'framer-motion';
+import { ChevronDown, ChevronUp, LineChart, Brain, Signal, Shield, TrendingUp, ArrowRight, Search, HelpCircle } from 'lucide-react';
 
 import Header from '../components/Header'
 const containerVariants = {
@@ -12,6 +10,8 @@ const containerVariants = {
         transition: { staggerChildren: 0.3 },
     },
 };
+
+
 
 const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -23,27 +23,61 @@ const buttonVariants = {
     hover: { scale: 1.05 },
     tap: { scale: 0.95 },
 };
-
+const features = [
+    {
+        title: 'Real-Time Quotes',
+        desc: 'Daily closing prices & volumes pulled straight from public finance APIs.',
+        icon: LineChart,
+        gradient: 'from-blue-500 to-cyan-400',
+        delay: 0.2
+    },
+    {
+        title: 'AI-Driven Predictions',
+        desc: 'Our ML model analyzes the last 20 days of data to forecast tomorrows close.',
+        icon: Brain,
+        gradient: 'from-purple-500 to-pink-400',
+        delay: 0.4
+    },
+    {
+        title: 'Simple Signals',
+        desc: 'Green = Buy, Gray = Hold, Red = Sell – decision-making made easy.',
+        icon: Signal,
+        gradient: 'from-green-500 to-emerald-400',
+        delay: 0.6
+    },
+    {
+        title: 'Secure Access',
+        desc: 'Protected by Firebase Authentication. Your predictions, your account, always secure.',
+        icon: Shield,
+        gradient: 'from-red-500 to-orange-400', // Changed gradient to match security theme
+        delay: 0.8
+    }
+];
 const faqs = [
     {
         q: 'Is StockSight really free?',
-        a: 'Yes—StockSight is 100% free. No sign-up, no hidden fees.'
+        a: 'While we offer a free tier with basic features, we also have premium plans for advanced features. Sign up now to explore our platform and choose what works best for you.',
+        category: 'Pricing'
     },
     {
         q: 'Where does the data come from?',
-        a: 'We pull daily prices & volumes from public APIs (yfinance / Alpha Vantage).'
+        a: 'We source our data from reliable public APIs (yfinance / Alpha Vantage) to provide you with accurate, real-time market information for informed decision-making.',
+        category: 'Data'
     },
     {
         q: 'How does the prediction work?',
-        a: 'A Random Forest / Regression model is trained on the last 20 days of data to forecast tomorrow’s closing price.'
+        a: 'Our ML model uses Random Forest/Regression techniques trained on 20-day historical data patterns to forecast next-day closing prices. The model is retrained daily for optimal accuracy.',
+        category: 'Technology'
     },
     {
         q: 'How often is data updated?',
-        a: 'Data and model retraining happen once every 24 hours to keep signals fresh.'
+        a: 'Data is refreshed every 24 hours, and our ML models are retrained daily to ensure you receive the most current and accurate predictions possible.',
+        category: 'Data'
     },
     {
         q: 'Is this investment advice?',
-        a: 'No—this is an educational tool. Always conduct your own research before trading.'
+        a: 'No, StockSight is an educational and analytical tool. While we provide data-driven insights, all trading decisions should be made based on your own research and risk assessment.',
+        category: 'Legal'
     }
 ];
 
@@ -52,21 +86,21 @@ const steps = [
         num: 1,
         title: 'Add Your Ticker',
         desc: 'Enter your stock symbol and pick a period & interval.',
-        icon: Search ,
+        icon: Search,
         color: 'from-blue-500 to-cyan-500'
     },
     {
         num: 2,
         title: 'View Predictions',
         desc: 'See todays close price alongside our next-day forecast and trend indicator.',
-        icon: TrendingUp ,
+        icon: TrendingUp,
         color: 'from-purple-500 to-pink-500'
     },
     {
         num: 3,
         title: 'Act Confidently',
-    desc: 'Use the Buy/Hold/Sell signal to guide your trading decisions.',
-    icon: LineChart ,
+        desc: 'Use the Buy/Hold/Sell signal to guide your trading decisions.',
+        icon: LineChart,
         color: 'from-green-500 to-emerald-500'
     }
 ];
@@ -76,13 +110,11 @@ export default function Homepage() {
 
     return (
         <div className="font-sans text-gray-800">
+
             {/* Header */}
             <Header />
+
             {/* Hero Section */}
-
-
-
-
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-white to-blue-50">
                 {/* Animated Background Elements */}
                 <div className="absolute inset-0 overflow-hidden">
@@ -224,57 +256,86 @@ export default function Homepage() {
 
 
             {/* Features Section */}
-            <section id="features" className="py-20">
-                <div className="max-w-7xl mx-auto px-4">
-                    <motion.h2
-                        className="text-3xl font-bold text-center mb-12"
-                        variants={itemVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        Why StockSight?
-                    </motion.h2>
+            <section id="features" className="relative py-24 overflow-hidden bg-gray-50">
+                {/* Background Decoration */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,0,0,0.02),transparent)] pointer-events-none" />
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        className="text-center mb-20"
                     >
-                        {[
-                            {
-                                title: 'Real-Time Quotes',
-                                desc: 'Daily closing prices & volumes pulled straight from public finance APIs.'
-                            },
-                            {
-                                title: 'AI-Driven Predictions',
-                                desc: 'Our ML model analyzes the last 20 days of data to forecast tomorrow’s close.'
-                            },
-                            {
-                                title: 'Simple Signals',
-                                desc: 'Green = Buy, Gray = Hold, Red = Sell – decision-making made easy.'
-                            },
-                            {
-                                title: 'Zero Setup',
-                                desc: 'No signup, no fees. Just add tickers and start tracking instantly.'
-                            }
-                        ].map((f, i) => (
+                        <motion.span
+                            className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold mb-6"
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                        >
+                            Why Choose Us
+                        </motion.span>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                            Why StockSight?
+                        </h2>
+                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                            Advanced technology made simple. Get everything you need to make informed trading decisions.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {features.map((feature, index) => (
                             <motion.div
-                                key={i}
-                                className="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-lg transition"
-                                variants={itemVariants}
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: feature.delay }}
+                                className="group relative"
                             >
-                                <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
-                                <p className="text-gray-600">{f.desc}</p>
+                                {/* Card */}
+                                <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
+                                    {/* Gradient Border on Hover */}
+                                    <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl -m-0.5`} />
+
+                                    <div className="relative bg-white rounded-2xl p-6">
+                                        {/* Icon */}
+                                        <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${feature.gradient} p-0.5 mb-6 transform group-hover:scale-110 transition-transform duration-300`}>
+                                            <div className="w-full h-full bg-white rounded-[10px] flex items-center justify-center">
+                                                <feature.icon className={`w-6 h-6 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`} />
+                                            </div>
+                                        </div>
+
+                                        {/* Content */}
+                                        <h3 className="text-xl font-bold mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-gray-900 group-hover:to-gray-600 transition-all duration-300">
+                                            {feature.title}
+                                        </h3>
+                                        <p className="text-gray-600">
+                                            {feature.desc}
+                                        </p>
+
+                                        {/* Additional Firebase Badge for the Security Feature */}
+                                        {feature.title === 'Secure Access' && (
+                                            <div className="mt-4 flex items-center justify-center">
+                                                <span className="inline-flex items-center px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-medium">
+                                                    <svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
+                                                        <path d="M12 0C8.97 0 6.5 2.47 6.5 5.5V9H5a2 2 0 00-2 2v11a2 2 0 002 2h14a2 2 0 002-2V11a2 2 0 00-2-2h-1.5V5.5C17.5 2.47 15.03 0 12 0zm0 2c1.97 0 3.5 1.53 3.5 3.5V9h-7V5.5C8.5 3.53 10.03 2 12 2z" />
+                                                    </svg>
+                                                    Powered by Firebase Auth
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
                             </motion.div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
 
-{/* Get Started Section */}
+
+            {/* Get Started Section */}
             <section id="get-started" className="relative py-24 bg-gradient-to-b from-gray-50 to-white">
                 {/* Background Pattern */}
                 <div className="absolute inset-0 bg-grid-gray-100 opacity-40" />
@@ -357,43 +418,109 @@ export default function Homepage() {
             </section>
 
             {/* FAQ Section */}
-            <section id="faq" className="py-20">
-                <div className="max-w-3xl mx-auto px-4">
-                    <motion.h2
-                        className="text-3xl font-bold text-center mb-8"
-                        variants={itemVariants}
-                        initial="hidden"
-                        whileInView="visible"
+            <section id="faq" className="relative py-24 bg-gray-50">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-[linear-gradient(30deg,rgba(59,130,246,0.02)_12%,transparent_12.5%,transparent_87%,rgba(59,130,246,0.02)_87.5%,rgba(59,130,246,0.02)_0)] bg-[length:20px_20px]" />
+
+                <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        className="text-center mb-16"
                     >
-                        Frequently Asked Questions
-                    </motion.h2>
+                        <motion.span
+                            className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold mb-6"
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                        >
+                            <HelpCircle className="w-4 h-4 mr-2" />
+                            Got Questions?
+                        </motion.span>
+                        <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                            Frequently Asked Questions
+                        </h2>
+                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                            Everything you need to know about StockSight. Can't find the answer you're looking for? Feel free to contact us.
+                        </p>
+                    </motion.div>
+
                     <motion.div
                         className="space-y-4"
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                     >
-                        {faqs.map((f, i) => (
-                            <motion.div key={i} className="border-b border-gray-200" variants={itemVariants}>
+                        {faqs.map((faq, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
+                            >
                                 <button
-                                    className="w-full flex justify-between items-center py-4 text-left font-medium text-gray-800"
-                                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                    className="w-full px-6 py-4 text-left focus:outline-none"
+                                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
                                 >
-                                    {f.q}
-                                    {openFaq === i ? <ChevronUp /> : <ChevronDown />}
-                                </button>
-                                {openFaq === i && (
-                                    <div className="px-4 pb-4 text-gray-600">
-                                        {f.a}
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center space-x-4">
+                                            <span className="text-lg font-semibold text-gray-800">{faq.q}</span>
+                                            <span className={`px-2 py-1 text-xs font-medium rounded-full ${{
+                                                'Pricing': 'bg-green-100 text-green-700',
+                                                'Data': 'bg-blue-100 text-blue-700',
+                                                'Technology': 'bg-purple-100 text-purple-700',
+                                                'Legal': 'bg-red-100 text-red-700'
+                                            }[faq.category]
+                                                }`}>
+                                                {faq.category}
+                                            </span>
+                                        </div>
+                                        <div className={`transform transition-transform duration-200 ${openFaq === index ? 'rotate-180' : ''}`}>
+                                            <ChevronDown className="w-5 h-5 text-gray-500" />
+                                        </div>
                                     </div>
-                                )}
+                                </button>
+
+                                <AnimatePresence>
+                                    {openFaq === index && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="px-6 pb-4 text-gray-600 border-t border-gray-100">
+                                                {faq.a}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </motion.div>
                         ))}
                     </motion.div>
+
+                    {/* Contact CTA */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="mt-12 text-center"
+                    >
+                        <p className="text-gray-600">
+                            Still have questions?{' '}
+                            <a href="/contact" className="text-blue-600 hover:text-blue-700 font-medium">
+                                Contact our support team
+                            </a>
+                        </p>
+                    </motion.div>
                 </div>
             </section>
+
+
 
             {/* Footer */}
             <footer className="bg-gray-800 text-gray-300 py-12">
