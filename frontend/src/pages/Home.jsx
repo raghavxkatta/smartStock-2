@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion,AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, LineChart, Brain, Signal, Shield, TrendingUp, ArrowRight, Search, HelpCircle } from 'lucide-react';
 
-import Header from '../components/Header'
+
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -110,10 +110,6 @@ export default function Homepage() {
 
     return (
         <div className="font-sans text-gray-800">
-
-            {/* Header */}
-            <Header />
-
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-white to-blue-50">
                 {/* Animated Background Elements */}
@@ -519,53 +515,7 @@ export default function Homepage() {
                     </motion.div>
                 </div>
             </section>
-
-
-
-            {/* Footer */}
-            <footer className="bg-gray-800 text-gray-300 py-12">
-                <motion.div
-                    className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 space-y-4 md:space-y-0"
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                >
-                    <motion.div className="text-sm" variants={itemVariants}>
-                        © 2025 StockSight. All rights reserved.
-                    </motion.div>
-                    <motion.div className="flex space-x-4" variants={itemVariants}>
-                        <a href="#home" className="hover:text-white">Home</a>
-                        <a href="#features" className="hover:text-white">Features</a>
-                        <a href="#get-started" className="hover:text-white">Get Started</a>
-                        <a href="#faq" className="hover:text-white">FAQ</a>
-                        <a
-                            href="https://github.com/your-username/stock-sight-api"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-white"
-                        >
-                            GitHub
-                        </a>
-                    </motion.div>
-                    <motion.div variants={itemVariants}>
-                        {/* GitHub icon SVG (same as before) */}
-                        <a
-                            href="https://github.com/your-username/stock-sight-api"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block"
-                        >
-                            <svg className="w-6 h-6 fill-current" viewBox="0 0 16 16">
-                                <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.19.01-.82.01-1.49c2.01.37 2.53-.49 2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-1.13-.83-.34-.3-.6-.63-.84-.99-.2-.36-.44-.76-1.05-.91-.51-.15-.92-.01-1.13.08-.2.09-.47.24-.59.44-.11.2-.29.46-.42.67-.13.21-.29.45-.47.69-.18.23-.38.4-.6.58-.22.17-.46.33-.73.48-.27.15-.55.26-.85.33-.3.07-.6.07-.89 0-.29-.07-.59-.18-.88-.34-.29-.15-.58-.32-.88-.53-.3-.21-.59-.45-.83-.69-.24-.24-.44-.45-.6-.75-.16-.3-.25-.61-.26-.93-.01-.32.06-.63.21-.9-.19-.23-.45-.52-.67-.94-.22-.4-.36-.82-.41-1.27-.05-.45-.04-.9-.03-1.35.01-.45.05-.9.13-1.35.08-.45.2-.89.35-1.32.15-.43.35-.84.57-1.24.22-.4.48-.77.76-1.13.28-.36.59-.68.91-.99.32-.3.67-.57 1.08-.8a6.673 6.673 0 0 1 2.58-.71c.97-.03 1.94.05 2.91.24 1.02.2 2 .5 2.92.94-.02.25-.04.5-.04.75-.01 1.55.18 2.83.54 3.82.36.99.93 1.76 1.73 2.31.8.55 1.82.88 3 1a8.013 8.013 0 0 1 2.59.59A8 8 0 0 0 8 0z" />
-                            </svg>
-                        </a>
-                    </motion.div>
-                </motion.div>
-                <div className="mt-6 text-center text-sm text-gray-400 px-4">
-                    Disclaimer: StockSight is an educational tool, not financial advice. All trading decisions are your own responsibility.
-                </div>
-            </footer>
+   
         </div>
     );
 }
