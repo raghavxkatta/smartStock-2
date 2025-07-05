@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-
+import Header from '../components/Header'
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -50,40 +50,7 @@ export default function Homepage() {
     return (
         <div className="font-sans text-gray-800">
             {/* Header */}
-            <motion.header
-                className="sticky top-0 w-full bg-white shadow px-8 py-4 z-50"
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ type: 'spring', stiffness: 50 }}
-            >
-                <div className="max-w-7xl mx-auto flex items-center justify-between">
-                    <div className="text-2xl font-bold">StockSight</div>
-                    <nav className="hidden md:flex space-x-6">
-                        <a href="#home" className="text-gray-700 hover:text-blue-600">Home</a>
-                        <a href="#features" className="text-gray-700 hover:text-blue-600">Features</a>
-                        <a href="#get-started" className="text-gray-700 hover:text-blue-600">Get Started</a>
-                        <a href="#faq" className="text-gray-700 hover:text-blue-600">FAQ</a>
-                        <a
-                            href="https://github.com/your-username/stock-sight-api"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-700 hover:text-blue-600"
-                        >
-                            GitHub
-                        </a>
-                    </nav>
-                    <motion.button
-                        className="ml-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none"
-                        variants={buttonVariants}
-                        whileHover="hover"
-                        whileTap="tap"
-                        onClick={() => document.getElementById('get-started').scrollIntoView({ behavior: 'smooth' })}
-                    >
-                        Add Ticker
-                    </motion.button>
-                </div>
-            </motion.header>
-
+<Header/>
             {/* Hero Section */}
             <section id="home" className="bg-blue-50 py-20">
                 <motion.div
