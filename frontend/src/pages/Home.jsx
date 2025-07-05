@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import {TrendingUp, ArrowRight} from 'lucide-react';
+
 import Header from '../components/Header'
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -9,7 +11,7 @@ const containerVariants = {
         transition: { staggerChildren: 0.3 },
     },
 };
-
+    
 const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -50,51 +52,151 @@ export default function Homepage() {
     return (
         <div className="font-sans text-gray-800">
             {/* Header */}
-<Header/>
+            <Header />
             {/* Hero Section */}
-            <section id="home" className="bg-blue-50 py-20">
-                <motion.div
-                    className="max-w-4xl mx-auto text-center px-4"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                >
-                    <motion.h1
-                        className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4"
-                        variants={itemVariants}
+
+            
+            
+
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-white to-blue-50">
+                {/* Animated Background Elements */}
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute -top-1/2 -left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+                    <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+                    <div className="absolute -bottom-1/2 left-1/4 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+                </div>
+
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                    <motion.div
+                        className="text-center"
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
                     >
-                        Predict Tomorrow’s Stock Moves, Today
-                    </motion.h1>
-                    <motion.p
-                        className="text-lg text-gray-700 mb-8"
-                        variants={itemVariants}
-                    >
-                        AI-powered buy/hold/sell signals—no jargon, just clear guidance.
-                    </motion.p>
-                    <motion.div className="flex justify-center gap-4" variants={itemVariants}>
-                        <motion.button
-                            className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg font-medium hover:bg-blue-700 focus:outline-none"
-                            variants={buttonVariants}
-                            whileHover="hover"
-                            whileTap="tap"
-                            onClick={() => document.getElementById('get-started').scrollIntoView({ behavior: 'smooth' })}
+                        {/* Floating Badge */}
+                        <motion.div
+                            className="inline-flex items-center px-4 py-2 bg-blue-600/10 rounded-full text-blue-600 text-sm font-medium mb-8"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
                         >
-                            Get Started
-                        </motion.button>
-                        <motion.a
-                            href="https://github.com/your-username/stock-sight-api"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="ml-2 text-blue-600 hover:underline self-center"
-                            variants={buttonVariants}
-                            whileHover="hover"
-                            whileTap="tap"
+                            <TrendingUp className="w-4 h-4 mr-2" />
+                            Powered by Advanced ML Models
+                        </motion.div>
+
+                        {/* Main Heading with Gradient */}
+                        <motion.h1
+                            className="text-5xl md:text-7xl font-extrabold mb-6"
+                            variants={itemVariants}
                         >
-                            View on GitHub
-                        </motion.a>
+                            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                                Predict Tomorrow's
+                            </span>
+                            <br />
+                            <span className="text-gray-900">Stock Moves, Today</span>
+                        </motion.h1>
+
+                        {/* Subheading with Enhanced Typography */}
+                        <motion.p
+                            className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto"
+                            variants={itemVariants}
+                        >
+                            Make data-driven decisions with AI-powered signals.
+                            <br className="hidden sm:block" />
+                            No complexity, just clear buy/hold/sell guidance.
+                        </motion.p>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                            variants={itemVariants}
+                        >
+                            <motion.a
+                                href="/signup"
+                                className="group relative inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl overflow-hidden shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-shadow"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <span className="relative flex items-center">
+                                    Get Started Free
+                                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            </motion.a>
+
+                            <motion.a
+                                href="#features"
+                                className="inline-flex items-center px-6 py-3 text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                Learn More
+                                <ChevronDown className="w-4 h-4 ml-1" />
+                            </motion.a>
+                        </motion.div>
+
+                        {/* Stats Section */}
+                        <motion.div
+                            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            {[
+                                { label: 'Active Users', value: '10K+' },
+                                { label: 'Predictions Made', value: '1M+' },
+                                { label: 'Accuracy Rate', value: '94%' },
+                                { label: 'Daily Analysis', value: '500+' },
+                            ].map((stat, index) => (
+                                <motion.div
+                                    key={stat.label}
+                                    className="text-center"
+                                    variants={itemVariants}
+                                >
+                                    <div className="text-3xl font-bold text-blue-600">{stat.value}</div>
+                                    <div className="text-sm text-gray-600">{stat.label}</div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
                     </motion.div>
+                </div>
+
+                {/* Scroll Indicator */}
+                <motion.div
+                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                    animate={{
+                        y: [0, 10, 0],
+                    }}
+                    transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                    }}
+                >
+                    <ChevronDown className="w-6 h-6 text-gray-400" />
                 </motion.div>
+
+                {/* Add this to your global CSS or Tailwind config */}
+                <style jsx>{`
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
             </section>
+
+
 
             {/* Features Section */}
             <section id="features" className="py-20">

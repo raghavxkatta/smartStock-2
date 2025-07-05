@@ -24,8 +24,10 @@ function Header() {
                     <a href="#get-started" className="text-gray-700 hover:text-blue-600">Get Started</a>
                     <a href="#faq" className="text-gray-700 hover:text-blue-600">FAQ</a>
                 </nav>
+<div>
+
                 <motion.button
-                    className="ml-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none"
+                    className="ml-6 px-4 py-2  text-black font-semibold cursor-pointer rounded-lg hover:text-blue-700 focus:outline-none"
                     variants={buttonVariants}
                     initial="initial"
                     whileHover="hover"
@@ -38,6 +40,21 @@ function Header() {
                 >
                     Login
                 </motion.button>
+                <motion.button
+                    className="ml-6 px-4 py-2 bg-blue-600 cursor-pointer text-white rounded-lg hover:bg-blue-700 focus:outline-none"
+                    variants={buttonVariants}
+                    initial="initial"
+                    whileHover="hover"
+                    whileTap="tap"
+                    onClick={() =>
+                        document
+                            .getElementById('get-started')
+                            .scrollIntoView({ behavior: 'smooth' })
+                    }
+                >
+                    Sign Up
+                </motion.button>
+</div>
             </div>
         </motion.header>
     );
